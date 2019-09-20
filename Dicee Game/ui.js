@@ -9,3 +9,15 @@ button.onclick = function() {
   var result = dice.roll();
   printNumber(result);
 };
+
+var div = document.createElement("div");
+div.style.width = "58px";
+div.style.height = "54px";
+div.style.background = "red";
+div.style.borderRadius = "64%";
+div.style.color = "white";
+div.style.marginLeft = "48%";
+div.style.marginTop= "-13%";
+div.innerHTML = "Hello";
+
+document.getElementById("main").appendChild(div);
