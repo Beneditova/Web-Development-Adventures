@@ -67,7 +67,7 @@ button {
 }
 
 .dot {
-  display: block;
+    display: block;
     width: 58px;
     height: 54px;
     border-radius: 64%;
