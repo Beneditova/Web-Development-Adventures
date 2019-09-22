@@ -14,14 +14,35 @@ button.onclick = function() {
 
 console.log(result);
 
-var middleDiceElement = function () {
+var middleTopDiceElement = function () {
 
-  var firstDice = document.createElement("div");
-  firstDice.classList.add("middleDots");
+  var topMiddleDot = document.createElement("div");
+  topMiddleDot.classList.add("middleDots");
+  topMiddleDot.setAttribute("id", "topMiddleDot");
 
-  return firstDice;
+  return topMiddleDot;
 };
 
-  document.getElementById("topMiddleDot").appendChild(middleDiceElement());
-  document.getElementById("middleDot").appendChild(middleDiceElement());
-  document.getElementById("lowestMiddleDot").appendChild(middleDiceElement());
+var middleDiceElement = function () {
+
+  var middleDot = document.createElement("div");
+  middleDot.classList.add("middleDots");
+  middleDot.setAttribute("id", "middleDot");
+
+  return middleDot;
+};
+
+var lowestMiddleDiceElement = function () {
+
+  var lowestMiddleDot = document.createElement("div");
+  lowestMiddleDot.classList.add("middleDots");
+  lowestMiddleDot.setAttribute("id", "lowestMiddleDot");
+
+  return lowestMiddleDot;
+};
+
+
+
+  document.getElementById("placeholderDice").appendChild(middleTopDiceElement());
+  document.getElementById("placeholderDice").appendChild(middleDiceElement());
+  document.getElementById("placeholderDice").appendChild(lowestMiddleDiceElement());

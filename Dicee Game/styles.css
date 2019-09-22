@@ -66,6 +66,15 @@ button {
   font-size:80px;
 }
 
+#placeholderDice {
+  height: 100px;
+  width: 100px;
+  padding: 50px;
+  margin: 50px auto;
+  border: 1px solid gray;
+  border-radius: 10px;
+  font-size:80px;
+}
 .middleDots {
     display: block;
     width: 50px;
@@ -75,6 +84,14 @@ button {
     background-color: #333;
   }
 
+  .leftDots {
+      display: block;
+      width: 50px;
+      height: 50px;
+      border-radius: 64%;
+      margin: 42px 23px 32px;
+      background-color: #333;
+    }
 #topMiddleDot{
 margin: -55px 0px -17px;
 
