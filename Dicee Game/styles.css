@@ -66,12 +66,19 @@ button {
   font-size:80px;
 }
 
-.firstDot {
+.middleDots {
     display: block;
-    width: 58px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
     border-radius: 64%;
-    margin:25px 19px 7px;
+    margin: 21px 24px 28px;
     background-color: #333;
-    box-shadow: inset 0 3px #111,
+  }
+
+#topMiddleDot{
+margin: -55px 0px -17px;
+
+}
+#lowestMiddleDot{
+margin: -15px 2px 7px;
 }

@@ -11,14 +11,17 @@ button.onclick = function() {
   printNumber(result);
 
 };
+
 console.log(result);
 
-var createDiceElement = function (result) {
+var middleDiceElement = function () {
 
   var firstDice = document.createElement("div");
-  firstDice.classList.add("firstDot");
+  firstDice.classList.add("middleDots");
 
   return firstDice;
 };
 
-  document.getElementById("main").appendChild(createDiceElement(result));
+  document.getElementById("topMiddleDot").appendChild(middleDiceElement());
+  document.getElementById("middleDot").appendChild(middleDiceElement());
+  document.getElementById("lowestMiddleDot").appendChild(middleDiceElement());
