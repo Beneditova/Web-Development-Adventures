@@ -75,6 +75,7 @@ button {
   border-radius: 10px;
   font-size:80px;
 }
+
 .middleDots {
     display: block;
     width: 50px;
@@ -84,11 +85,45 @@ button {
     background-color: #333;
   }
 
+  .leftDots{
+      display: block;
+      width: 50px;
+      height: 50px;
+      border-radius: 64%;
+      margin: -118px -34px;
+      background-color: #333;
+    }
+
+    .rightDots{
+        display: block;
+        width: 50px;
+        height: 50px;
+        border-radius: 64%;
+        margin: -186px 87px;
+        background-color: #333;
+      }
+
+
+#letf{
+      margin: 47px 24px 44px;
+  }
 
 #topMiddleDot{
-margin: -45px 21px -25px;
+margin: -45px 23px -26px
 }
 
 #lowestMiddleDot{
 margin: -24px 24px;
+}
+
+#lowestLeftDot{
+  margin: 203px -35px;
+}
+
+#lowestRightDot{
+margin: 67px 84px;
+}
+
+#topRightDot{
+  margin: -253px 88px 68px;
 }

@@ -4,6 +4,7 @@ function printNumber(number) {
 }
 
 var button = document.getElementById("button");
+
 var result;
 
 button.onclick = function() {
@@ -14,7 +15,7 @@ button.onclick = function() {
 
 console.log(result);
 
-var middleDiceElement = function () {
+var middleDiceElements = function () {
 
   var topMiddleDot = document.createElement("div");
   topMiddleDot.classList.add("middleDots");
@@ -33,6 +34,52 @@ var middleDiceElement = function () {
   return middleElements;
 };
 
-for (var i = 0; i < middleDiceElement().length; i++) {
-document.getElementById("placeholderDice").appendChild(middleDiceElement()[i]);
+var leftDiceElements = function () {
+
+  var topLeftDot = document.createElement("div");
+  topLeftDot.classList.add("leftDots");
+  topLeftDot.setAttribute("id", "topLeftDot");
+
+  var middleLeftDot = document.createElement("div");
+  middleLeftDot.classList.add("leftDots");
+  middleLeftDot.setAttribute("id", "middleLeftDot");
+
+  var lowestLeftDot = document.createElement("div");
+  lowestLeftDot.classList.add("leftDots");
+  lowestLeftDot.setAttribute("id", "lowestLeftDot");
+
+  var leftElements = [topLeftDot, middleLeftDot, lowestLeftDot];
+
+  return leftElements;
+};
+
+var rightDiceElements = function () {
+
+  var topRightDot = document.createElement("div");
+  topRightDot.classList.add("rightDots");
+  topRightDot.setAttribute("id", "topRightDot");
+
+  var middleRightDot = document.createElement("div");
+  middleRightDot.classList.add("rightDots");
+  middleRightDot.setAttribute("id", "middleRightDot");
+
+  var lowestRightDot = document.createElement("div");
+  lowestRightDot.classList.add("rightDots");
+  lowestRightDot.setAttribute("id", "lowestRightDot");
+
+  var rightElements = [topRightDot, middleRightDot, lowestRightDot];
+
+  return rightElements;
+};
+
+for (var i = 0; i < middleDiceElements().length; i++) {
+document.getElementById("placeholderDice").appendChild(middleDiceElements()[i]);
+}
+
+for (var i = 0; i < leftDiceElements().length; i++) {
+document.getElementById("placeholderDice").appendChild(leftDiceElements()[i]);
+}
+
+for (var i = 0; i < rightDiceElements().length; i++) {
+document.getElementById("placeholderDice").appendChild(rightDiceElements()[i]);
 }
