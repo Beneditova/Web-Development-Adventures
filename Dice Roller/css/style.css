@@ -55,30 +55,25 @@ button {
     margin: 0 auto;
 }
 
-.dice_wrapper div {
+.dice_wrapper > div {
    justify-content: center;
-    width:  14%;
-    height: 150px;
-    border-radius: 7px;
-    background-color: white;
-    flex-direction: row;
-    text-align: center;
+   width: 150px;
+   height: 150px;
+   border-radius: 7px;
+   background-color: white;
+   flex-direction: row;
+   text-align: center;
+   flex-flow: row wrap;
+   display: flex;
 }
 
-div[id*="dice"] {
-   display: grid;
-   grid-template-columns: 1fr 1fr 1fr;
+.yahtzee_die div {
+    background-color: #df5757;
+    border-radius: 50%;
+    margin: 2%;
+    height: 28%;
+    width: 28%;
 }
-
-div[id*="dice"] >  div[id*="left"]  .leftDots,
-div[id*="dice"] >  div[id*="middle"]  .middleDots,
-div[id*="dice"] >  div[id*="right"]  .rightDots
- {
-      width: 44px;
-      height: 47px;
-      border-radius: 64%;
-      background-color: #333;
-  }
 
 footer {
   margin-top: 5%;

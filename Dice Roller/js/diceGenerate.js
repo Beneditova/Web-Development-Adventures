@@ -11,8 +11,13 @@ function Dice(sides) {
 }
 
 Dice.prototype.roll = function diceRoll () {
-  var randomNumber = Math.floor(Math.random() * this.sides) + 1;
-    return randomNumber;
+  var randomNumbersHolder;
+
+  for (var i = 0; i < array.length; i++) {
+    randomNumbersHolder.push(Math.floor(Math.random() * this.sides) + 1);
+  }
+
+    return randomNumbersHolder;
   };
-  
+
 var dice = new Dice(6);
