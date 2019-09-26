@@ -14,4 +14,5 @@ Dice.prototype.roll = function diceRoll () {
   var randomNumber = Math.floor(Math.random() * this.sides) + 1;
     return randomNumber;
   };
+  
 var dice = new Dice(6);
