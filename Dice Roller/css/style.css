@@ -47,7 +47,7 @@ button {
   cursor: pointer;
 }
 
-#dice_wrapper {
+.dice_wrapper {
     display: flex;
     justify-content: space-around;
     width: 70%;
@@ -55,37 +55,34 @@ button {
     margin: 0 auto;
 }
 
-#dice_wrapper div {
+.dice_wrapper div {
+   justify-content: center;
     width:  14%;
     height: 150px;
     border-radius: 7px;
     background-color: white;
+    flex-direction: row;
     text-align: center;
 }
 
+div[id*="dice"] {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+}
 
-  div#dice_1 > .leftDots{
-    display: grid;
+div[id*="dice"] >  div[id*="left"]  .leftDots,
+div[id*="dice"] >  div[id*="middle"]  .middleDots,
+div[id*="dice"] >  div[id*="right"]  .rightDots
+ {
       width: 44px;
       height: 47px;
       border-radius: 64%;
-      margin: 4px 9px -4px;
       background-color: #333;
   }
-
-  div#dice_1 > .middleDots{
-    width: 44px;
-      height: 47px;
-      border-radius: 64%;
-      margin: -102px 54px 1px;
-      background-color: #333;
-  }
-
 
 footer {
   margin-top: 5%;
   color: #EEEEEE;
   text-align: center;
   font-family: 'Indie Flower', cursive;
-
 }
