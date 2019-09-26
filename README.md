@@ -1,5 +1,5 @@
 Tasks that have to be completed: 
-Dice Game {
+Dice Roller {
 
 => 6 dice positions each has id = dice_{number} 
 => each dice has inside 9 dots
