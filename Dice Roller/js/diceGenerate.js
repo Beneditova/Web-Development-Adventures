@@ -1,16 +1,11 @@
 
-
 function Dice(sides) {
   this.sides = sides;
 }
 
 Dice.prototype.roll = function diceRoll () {
-  var randomNumbersHolder= [];
 
-  for (var i = 0; i < this.sides.length; i++) {
-    randomNumbersHolder.push(Math.floor(Math.random() * 10));
-  }
-
+    var randomNumbersHolder=(Math.floor(Math.random() * 10));
     return randomNumbersHolder;
   };
 
@@ -18,27 +13,33 @@ var dice = new Dice(6);
 
 
 function getDot(number) {
-  var placeholder = document.getElementById("dice_dot_"+number);
-  placeholder.innerHTML = number;
+  for (var i = 0; i < number; i++) {
+    var dot = document.getElementById("dice_dot_"+(i+1));
+    dot.innerHTML = style.color = 'blue';
+  }
 }
+
+var randomNumbersRoll = function(){
+  var result = dice.roll();
+  return result;
+};
 
 var button = document.getElementById("button");
 
-
 button.onclick = function() {
-  var result = dice.roll();
-
-  return result;
+    randomNumbersRoll();
   };
 
+ console.log(randomNumbersRoll());
 
 var allDice = document.getElementsByClassName("yahtzee_die");
 
 for(i = 0; i < allDice.length;i++)
 {
-  for (var j = 0; j < button.onclick().length; j++) {
-    allDice[i].style.color = 'red';
+    allDice[i].style.backgroundColor='blue';
+    var dotche =  document.getElementById("dice_dot_1");
+    dotche.style.backgroundColor='white';
+
   }
-}
 
 //getElement => on doc ready
