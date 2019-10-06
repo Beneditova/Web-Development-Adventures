@@ -12,12 +12,6 @@ Dice.prototype.roll = function diceRoll () {
 var dice = new Dice(6);
 
 
-function getDot(number) {
-  for (var i = 0; i < number; i++) {
-    var dot = document.getElementById("dice_dot_"+(i+1));
-    dot.innerHTML = style.color = 'blue';
-  }
-}
 
 var randomNumbersRoll = function(){
   var result = dice.roll();
@@ -26,20 +20,48 @@ var randomNumbersRoll = function(){
 
 var button = document.getElementById("button");
 
-button.onclick = function() {
-    randomNumbersRoll();
-  };
-
  console.log(randomNumbersRoll());
 
-var allDice = document.getElementsByClassName("yahtzee_die");
-
-for(i = 0; i < allDice.length;i++)
-{
-    allDice[i].style.backgroundColor='blue';
-    var dotche =  document.getElementById("dice_dot_1");
-    dotche.style.backgroundColor='white';
-
+ var diceSides = {
+    1: ["dice_dot_5"],
+    2: ["dice_dot_2", "dice_dot_8"],
+    3: ["dice_dot_3", "dice_dot_5", "dice_dot_7"],
+    4: ["dice_dot_1", "dice_dot_3", "dice_dot_7", "dice_dot_9"],
+    5: ["dice_dot_1", "dice_dot_3", "dice_dot_5", "dice_dot_7", "dice_dot_9"],
+    6: ["dice_dot_1", "dice_dot_3", "dice_dot_4", "dice_dot_6", "dice_dot_7", "dice_dot_9"]
+  };
+   
+  var dices = ["dice_1", "dice_2", "dice_3", "dice_4", "dice_5", "dice_6"];
+   
+ 
+  function clearOldDice() {
+    var coloredDice = document.getElementsByClassName('colored');
+    if (coloredDice.length) {
+      coloredDice.forEach(el => el.classList.remove('colored'));
+    }  
   }
+   
+  function rollDice() {
+    clearOldDice();
+    
+    dices.forEach(dice => {
+      var diceNumber= (Math.floor(Math.random()* 6)+1);
+      var visibleDots = diceSides[diceNumber];
+      var holder = document.getElementById(dice);
+     
+   
+    for(var i=0; i< visibleDots.length; i++) {
+     
+      var dot = holder.querySelectorAll(`[data-id="${visibleDots[i]}"]`)[0];
+      dot.classList.add('colored');
+    }
+    })
+     
+  }
+   
+  window.onload = rollDice();
+  
+  var button = document.getElementById('button');
+  button.addEventListener('click', rollDice);
 
 //getElement => on doc ready

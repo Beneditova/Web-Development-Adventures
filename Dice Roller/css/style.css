@@ -1,6 +1,9 @@
 * {
     color: white;
 }
+.colored {
+    background-color: blue!important;
+  }
 
 body {
     background-color: rgb(59, 77, 104);
@@ -68,7 +71,7 @@ button {
 }
 
 .yahtzee_die div {
-    background-color: #df5757;
+    background-color:white;
     border-radius: 50%;
     margin: 2%;
     height: 28%;
