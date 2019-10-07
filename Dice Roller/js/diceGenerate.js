@@ -35,7 +35,7 @@ var button = document.getElementById("button");
    
  
   function clearOldDice() {
-    var coloredDice = document.getElementsByClassName('colored');
+    var coloredDice = [].slice.call(document.getElementsByClassName('colored'));
     if (coloredDice.length) {
       coloredDice.forEach(el => el.classList.remove('colored'));
     }  
