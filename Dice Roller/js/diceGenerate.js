@@ -64,4 +64,4 @@ var button = document.getElementById("button");
   var button = document.getElementById('button');
   button.addEventListener('click', rollDice);
 
-//getElement => on doc ready
+
