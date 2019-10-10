@@ -33,3 +33,22 @@ var game = {
     }
   };
 
+  
+  function resetTempScorecard() {
+    game.temp_scorecard = {
+      one: 0,
+      two: 0,
+      three: 0,
+      four: 0,
+      five: 0,
+      six: 0,
+      threekind: 0,
+      fourkind: 0,
+      fullhouse: 0,
+      smallstraight: 0,
+      largestraight: 0,
+      yahtzee: 0,
+      chance: 0
+    };
+  }
+

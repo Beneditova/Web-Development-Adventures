@@ -4,7 +4,12 @@
 .colored {
     background-color: blue!important;
   }
-
+  .clicked {
+    background-color: #cdcbdd!important;
+  }
+  .clickedko {
+    background-color:blue!important;
+  }
 body {
     background-color: rgb(59, 77, 104);
 }

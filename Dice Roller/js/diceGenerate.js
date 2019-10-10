@@ -41,6 +41,17 @@ var button = document.getElementById("button");
     }  
   }
    
+var dice = {
+  die1: {}
+}
+
+dice.die1.assign(4)
+dice.die1.select()
+dice.die1.unselect()
+
+dice.getSelectedCount()
+dice.roll()
+
   function rollDice() {
     clearOldDice();
     
@@ -63,6 +74,16 @@ var button = document.getElementById("button");
   
   var button = document.getElementById('button');
   button.addEventListener('click', rollDice);
+ 
+  
+  document.querySelectorAll('.yahtzee_die').forEach(function(e) {
+    e.addEventListener('click', function() {
+      if (e.classList.contains('clicked')) {
+        e.classList.remove('clicked');
+      } else if(document.querySelectorAll('.clicked').length < 4)
+        e.classList.add('clicked')
+      })
+  });
 
 
   
