@@ -4,8 +4,12 @@ function Dice(sides) {
 }
 
 Dice.prototype.roll = function diceRoll () {
-
-    var randomNumbersHolder=(Math.floor(Math.random() * 10));
+    var randomNumbersHolder = [0,0,0,0,0,0];
+   
+    for(var i=0; i< randomNumbersHolder.length; i++) {
+      randomNumbersHolder[i]=(Math.floor(Math.random()* 6)+1);
+    }
+    
     return randomNumbersHolder;
   };
 
@@ -41,31 +45,24 @@ var button = document.getElementById("button");
     }  
   }
    
-var dice = {
-  die1: {}
-}
-
-dice.die1.assign(4)
-dice.die1.select()
-dice.die1.unselect()
-
-dice.getSelectedCount()
-dice.roll()
 
   function rollDice() {
     clearOldDice();
     
     dices.forEach(dice => {
-      var diceNumber= (Math.floor(Math.random()* 6)+1);
-      var visibleDots = diceSides[diceNumber];
-      var holder = document.getElementById(dice);
+      var index =0;
      
-   
-    for(var i=0; i< visibleDots.length; i++) {
+      var diceNumber= randomNumbersRoll();
+      var visibleDots = diceSides[diceNumber[index]];
+      var holder = document.getElementById(dice);
+      
+      index++;
+
+     for(var i=0; i< visibleDots.length; i++) {
      
       var dot = holder.querySelectorAll(`[data-id="${visibleDots[i]}"]`)[0];
       dot.classList.add('colored');
-    }
+     }
     })
      
   }
@@ -84,6 +81,9 @@ dice.roll()
         e.classList.add('clicked')
       })
   });
+
+
+  
 
 
   
