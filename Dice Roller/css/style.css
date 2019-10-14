@@ -1,15 +1,14 @@
 * {
     color: white;
 }
-.colored {
-    background-color: blue!important;
+div.colored {
+    background-color: blue;
   }
-  .clicked {
-    background-color: #cdcbdd!important;
+
+ div.dice_wrapper div.clicked {
+    background-color: #cdcbdd;
   }
-  .clickedko {
-    background-color:blue!important;
-  }
+ 
 body {
     background-color: rgb(59, 77, 104);
 }
@@ -121,7 +120,6 @@ button {
 }
 
 .yahtzee_die div {
-    background-color:white;
     border-radius: 50%;
     margin: 2%;
     height: 28%;
