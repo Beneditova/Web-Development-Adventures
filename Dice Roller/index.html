@@ -156,9 +156,14 @@
                     </div>
                 </div>
           </div>
-                <button id="button">Roll Dice</button>
-                <script src="js/diceGenerate.js" charset="utf-8"></script>
+                <button id="rollDiceButton">Roll Dice</button>
+               
                 <script src="js/dice.js" charset="utf-8"></script>
+                <script>
+
+                      var yahtzeeGame= new YahtzeeGame({buttonId: "#rollDiceButton", container: ".dice_wrapper"});
+                     
+               </script>
     </body>
  
     <footer>

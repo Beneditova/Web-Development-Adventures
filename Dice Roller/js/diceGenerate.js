@@ -75,16 +75,7 @@ var button = document.getElementById("button");
   
 
 
-
-
-
-  
-  
-   
-  
- 
-
-  var table = document.createElement('table');
+ var table = document.createElement('table');
   for (var i = 1; i < 4; i++){
     var tr = document.createElement('tr');   
 
@@ -95,6 +86,7 @@ var button = document.getElementById("button");
     var text2 = document.createTextNode('Text2');
 
     td1.appendChild(text1);
+    td1.classList.add('table-content')
     td2.appendChild(text2);
     tr.appendChild(td1);
     tr.appendChild(td2);

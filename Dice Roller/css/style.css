@@ -5,7 +5,7 @@ div.colored {
     background-color: blue;
   }
 
- div.dice_wrapper div.clicked {
+ div.dice_wrapper div.selected {
     background-color: #cdcbdd;
   }
  
