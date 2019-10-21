@@ -79,7 +79,9 @@
               </div>
               
             </div>
- 
+           
+            <div id="content"></div>
+           
             <div class="dice_wrapper">
                     <h3>Good Luck Champ</h3>
  
@@ -159,7 +161,10 @@
                 <button id="rollDiceButton">Roll Dice</button>
                
                 <script src="js/dice.js" charset="utf-8"></script>
-                <script>
+                
+                <script src="js/diceGenerate.js" charset="utf-8"></script>
+               
+               <script>
                   window.onload = function() {
                         var yahtzeeGame= new YahtzeeGame({buttonId: "#rollDiceButton", container: ".dice_wrapper"});
                  };
