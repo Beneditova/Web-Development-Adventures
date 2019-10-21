@@ -22,10 +22,13 @@ class Die {
       6: ["dice_dot_1", "dice_dot_3", "dice_dot_4", "dice_dot_6", "dice_dot_7", "dice_dot_9"]
     };
    
-    this.element.addEventListener('click', () => {
-       this.selectedState = !this.selectedState;
-    });
-
+    window.onload = ()=> {
+      this.element.addEventListener('click', () => {
+        this.selectedState = !this.selectedState;
+        this.updateDie();
+        });
+    };
+    
     return {
       getSelectedState:  () => {
         return self.selectedState;
@@ -46,11 +49,11 @@ class Die {
  updateDie(){
     this.resetDie();
 
-    var visibleDots = diceDots[this.currentDie];
+    var visibleDots = this.diceDots[this.currentDie];
    
     for(var i=0; i< visibleDots.length; i++) {
    
-      var dot = element.querySelectorAll(`[data-id="${visibleDots[i]}"]`)[0];
+      var dot = this.element.querySelectorAll(`[data-id="${visibleDots[i]}"]`)[0];
    
       dot.classList.add('colored');
     }
@@ -59,18 +62,18 @@ class Die {
   resetDie(){
     this.resetSelected();
     
-    element.querySelectorAll("> div").forEach(x => x.classList.remove('colored'));
+    this.element.querySelectorAll("div").forEach(x => x.classList.remove('colored'));
   }
  
    resetSelected(){
-    if (element.classList.contains('selected')) {
-      element.classList.remove('selected');
+    if (this.element.classList.contains('selected')) {
+      this.element.classList.remove('selected');
     }
    }
 
    dieSelected(){
      if(document.querySelectorAll('.selected').length < 4){
-      element.classList.add('selected');
+      this.element.classList.add('selected');
      }
    }
 }
@@ -89,7 +92,6 @@ class YahtzeeGame{
       }
       
       //this.dices["die1"]
-
 
       this.rollButton = document.querySelector(`${options.buttonId}`)
       this.rollButton.addEventListener('click', () => { this.rollDice() });
@@ -131,7 +133,7 @@ class YahtzeeGame{
    
     diceNumber.forEach((number,index) => {
       
-     this.dice[`die${index+1}`].setDie(diceNumber[index])
+     this.dices[`die${index+1}`].setDie(diceNumber[index])
     })
   }
 }
