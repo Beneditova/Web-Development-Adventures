@@ -36,8 +36,7 @@ var button = document.getElementById("button");
   };
    
   var dices = ["dice_1", "dice_2", "dice_3", "dice_4", "dice_5", "dice_6"];
-   
- 
+  
   function clearOldDice() {
     var coloredDice = [].slice.call(document.getElementsByClassName('colored'));
     if (coloredDice.length) {
@@ -72,9 +71,6 @@ var button = document.getElementById("button");
   var button = document.getElementById('button');
   button.addEventListener('click', rollDice);
  
-  
-
-
  var table = document.createElement('table');
   for (var i = 1; i < 4; i++){
     var tr = document.createElement('tr');   

@@ -91,8 +91,6 @@ class YahtzeeGame{
           die6: new Die(`${options.container} #dice_6`),
       }
       
-      //this.dices["die1"]
-
       this.rollButton = document.querySelector(`${options.buttonId}`)
       this.rollButton.addEventListener('click', () => { this.rollDice() });
       
@@ -138,8 +136,7 @@ class YahtzeeGame{
   }
 }
 
-
- class ScoreBoard{
+class ScoreBoard{
  
   constructor(){
     this.game = {
@@ -149,7 +146,10 @@ class YahtzeeGame{
       hold: [],
       temp_scorecard: {},
   }
-   this.temp_scorecard= {
+ 
+  this.mapper = { 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six'}
+  
+  this.temp_scorecard= {
       one: 0,
       two: 0,
       three: 0,
@@ -167,51 +167,15 @@ class YahtzeeGame{
    }
 
    return{
-      setOnes: (score) =>{
-         this.temp_scorecard.one = score;
+      setPoints: (category, score) =>{
+         this.temp_scorecard[category] = score;
       },
-      setTwos: (score) =>{
-        this.temp_scorecard.two = score;
-      },
-      setThrees: (score) =>{
-        this.temp_scorecard.three = score;
-      },
-      setFours: (score) =>{
-        this.temp_scorecard.four = score;
-      },
-      setFives: (score) =>{
-        this.temp_scorecard.five = score;
-      },
-      setSixes: (score) =>{
-        this.temp_scorecard.six = score;
-      },
-     
+   
       uppertotal : ()=> {
         return this.temp_scorecard.one + this.temp_scorecard.two + this.temp_scorecard.three 
         + this.temp_scorecard.four + this.temp_scorecard.five + this.temp_scorecard.six + this.temp_scorecard.bonus;
       },
-      setThreekind: (score)=> {
-        this.temp_scorecard.threekind = score;
-      },
-      setFourkind:(score)=> {
-        this.temp_scorecard.fourkind = score;
-      },
-      setFullhouse: (score)=> {
-        this.temp_scorecard.fullhouse = score;
-      },
-      setSmallstraight: (score)=> {
-        this.temp_scorecard.smallstraight = score;
-      },
-      setLargestraight:(score)=> {
-        this.temp_scorecard.largestraight = score;
-      },
-      setYahtzee: (score)=> {
-        this.temp_scorecard.yahtzee = score;
-      },
-      setChance: ()=> {
-        this.temp_scorecard.chance = score;
-      },
-      
+   
       lowertotal : ()=> {
       return this.threekind + this.fourkind + this.fullhouse + this.smallstraight + this.largestraight + this.yahtzee + this.chance;
       },
@@ -236,7 +200,10 @@ class YahtzeeGame{
   });
 
   sortedDice.map(function(number) {
-    var category;
+    for(var i=0; i< mapper.length; i++) {
+      game.temp_scorecard[this.mapper[number]] += number
+    }
+   /*  var category;
     if (number === 1) {
       category = "one";
     } else if (number === 2) {
@@ -249,9 +216,10 @@ class YahtzeeGame{
       category = "five";
     } else if (number === 6) {
       category = "six";
-    }
-    game.temp_scorecard[category] += number;
-    game.temp_scorecard.chance += number;
+    }*/
+   // game.temp_scorecard[category] += number;
+    
+   game.temp_scorecard.chance += number;
   });
 
    if (lg_straight) {
