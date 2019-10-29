@@ -90,44 +90,63 @@ var button = document.getElementById("button");
     table.appendChild(tr);
 }
 document.body.appendChild(table);
-*/
 
-var MOUNTAINS = [
-  {"name":"Mount Everest","height":8848,"country":"Nepal"},
-  {"name":"Mount Rushmore","height":18,"country":"USA"}
+
+
+var table = document.createElement('table');
+  for (var i = 1; i < 4; i++){
+    var tr = document.createElement('tr');   
+
+    var td1 = document.createElement('td');
+    var td2 = document.createElement('td');
+
+    var text1 = document.createTextNode('Text1');
+    var text2 = document.createTextNode('Text2');
+
+    td1.appendChild(text1);
+    td1.classList.add('table-content')
+    td2.appendChild(text2);
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+
+    table.appendChild(tr);
+}
+document.body.appendChild(table);
+
+*/
+var Points = [
+  {"Name":"Aces", "Score":0},
+  {"Name":"Twos", "Score":0},
+  {"Name":"Threes", "Score":0},
+  {"Name":"Fours", "Score":0},
+  {"Name":"Fives", "Score":0},
+  {"Name":"Sixes", "Score":0},
 ];	
 
-
 function buildTable(data) {
-    var table = document.createElement("table");
-    table.className="gridtable";
-    var thead = document.createElement("thead");
-    var tbody = document.createElement("tbody");
-    var headRow = document.createElement("tr");
-    ["Name","Height","Country"].forEach(function(el) {
-      var th=document.createElement("th");
-      th.appendChild(document.createTextNode(el));
-      headRow.appendChild(th);
-    });
-    thead.appendChild(headRow);
-    table.appendChild(thead); 
-    data.forEach(function(el) {
-      var tr = document.createElement("tr");
-      for (var o in el) {  
-        var td = document.createElement("td");
-        td.appendChild(document.createTextNode(el[o]))
-        tr.appendChild(td);
-      }
-      tbody.appendChild(tr);  
-    });
-    table.appendChild(tbody);             
-    return table;
+  var table = document.createElement("table");
+  table.className="gridtable";
+  var thead = document.createElement("thead");
+  var tbody = document.createElement("tbody");
+  var headRow = document.createElement("tr");
+  ["Name","Score"].forEach(function(el) {
+    var th=document.createElement("th");
+    th.appendChild(document.createTextNode(el));
+    headRow.appendChild(th);
+  });
+  thead.appendChild(headRow);
+  table.appendChild(thead); 
+  data.forEach(function(el) {
+    var tr = document.createElement("tr");
+    for (var o in el) {  
+      var td = document.createElement("td");
+      td.appendChild(document.createTextNode(el[o]))
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);  
+  });
+  table.appendChild(tbody);             
+  return table;
 }
 
-window.onload=function() {
-  document.getElementById("content").appendChild(buildTable(MOUNTAINS));
-}
-  
-
-
-  
+document.body.appendChild(buildTable(Points));

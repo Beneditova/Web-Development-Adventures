@@ -17,71 +17,40 @@
                 <h1>Roll random dice</h1>
                 <h2>let's see if your are lucky</h2>
             </div>
-            <div class="table-container">
-	
-              <div class="table">
-                <div class="table-header">
-                  <div class="header__item"><a id="name" >Upper Section</a></div>
-                  <div class="header__item"><a id="wins" >Score</a></div>
-                
-                </div>
-                <div class="table-content">	
-                  <div class="table-row">		
-                    <div class="table-data">Aces</div>
-                    
-                    <div class="table-data">5</div>
-                  </div>
-                  <div class="table-row">
-                    <div class="table-data">Twos</div>
-                   
-                    <div class="table-data">3</div>
-                  </div>
-                  <div class="table-row">
-                    <div class="table-data">Threes</div>
-                   
-                    <div class="table-data">2</div>
-                  </div>
-                  <div class="table-row">
-                    <div class="table-data">Fours</div>
-                   
-                    <div class="table-data">2</div>
-                  </div>
-                  <div class="table-row">
-                    <div class="table-data">Fives</div>
-                   
-                    <div class="table-data">2</div>
-                  </div>
-                  <div class="table-row">
-                    <div class="table-data">Sixes</div>
-                   
-                    <div class="table-data">2</div>
-                  </div>
-                  <div class="table-header">
-                    <div class="header__item"><a id="name" >Total Score</a></div>
-                   <!--(if total score is > 63, add 35)-->
-                    <div class="header__item"><a id="wins" >Bonus</a></div>
-                  
-                  </div>
-                  <div class="table-row">
-                    <div class="table-data">Sixes</div>
-                   
-                    <div class="table-data">2</div>
-                  </div>
-                  <div class="table-header">
-                    <div class="header__item"><a id="name" >New total</a></div>
-                  </div>
-                  <div class="table-row">
-                    <div class="table-data">Sixes</div>
-                   
-                    <div class="table-data">2</div>
-                  </div>
-                </div>	
-              </div>
-              
-            </div>
-           
-            <div id="content"></div>
-           
+          
+            <table class="score_board">
+              <thead>
+                <tr><th>Upper Section</th>
+                <th>Score</th></tr>
+              </thead>
+              <tbody>
+                <tr id="aces_score">
+                  <td>Aces</td>
+                  <td class="score_value">5</td>
+                </tr>
+                <tr id="twos_score">
+                  <td>Twos</td>
+                  <td class="score_value">5</td>
+                </tr>
+                <tr id="threes_score">
+                    <td>Threes</td>
+                    <td class="score_value">5</td>
+                  </tr>
+                  <tr id="fours_score">
+                      <td>Fours</td>
+                      <td class="score_value">5</td>
+                    </tr>
+                    <tr id="fives_score">
+                        <td>Fives</td>
+                        <td class="score_value">5</td>
+                      </tr>
+                      <tr id="sixes_score">
+                          <td>Sixes</td>
+                          <td class="score_value">5</td>
+                        </tr>
+              </tbody>
+            </table>
+            
             <div class="dice_wrapper">
                     <h3>Good Luck Champ</h3>
  
@@ -161,14 +130,9 @@
                 <button id="rollDiceButton">Roll Dice</button>
                
                 <script src="js/dice.js" charset="utf-8"></script>
-                
-                <script src="js/diceGenerate.js" charset="utf-8"></script>
-               
                <script>
-                  window.onload = function() {
-                        var yahtzeeGame= new YahtzeeGame({buttonId: "#rollDiceButton", container: ".dice_wrapper"});
-                 };
-               </script>
+                   var yahtzeeGame= new YahtzeeGame({buttonId: "#rollDiceButton", container: ".dice_wrapper"});
+              </script>
     </body>
  
     <footer>
