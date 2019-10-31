@@ -131,11 +131,11 @@ class YahtzeeGame {
     var diceNumber = this.roundRoll();
 
     var scoreBoard = new ScoreBoard();
-    scoreBoard.gameDice = [...diceNumber];
-  
+    scoreBoard.setArray(diceNumber);
+
     console.log(scoreBoard.gameDice);
 
-    scoreBoard.displayPossibilities;
+    scoreBoard.displayPossibilities();
 
     diceNumber.forEach((number, index) => {
       this.dices[`die${index + 1}`].setDie(diceNumber[index])
@@ -152,28 +152,28 @@ class ScoreBoard {
       hold: [],
       dice: [],
       temp_scorecard: {
-        one: { saved: 0, suggested: 0 },
-        two: { saved: 0, suggested: 0 },
-        three: { saved: 0, suggested: 0 },
-        four: { saved: 0, suggested: 0 },
-        five: { saved: 0, suggested: 0 },
-        six: { saved: 0, suggested: 0 },
+        ones: { saved: 0, suggested: 0 },
+        twos: { saved: 0, suggested: 0 },
+        threes: { saved: 0, suggested: 0 },
+        fours: { saved: 0, suggested: 0 },
+        fives: { saved: 0, suggested: 0 },
+        sixes: { saved: 0, suggested: 0 },
+        chance: { saved: 0, suggested: 0 },
+        smallstraight: { saved: 0, suggested: 0 },
+        largestraight: { saved: 0, suggested: 0 },
         bonus: { saved: 0, suggested: 0 },
         threekind: { saved: 0, suggested: 0 },
         fourkind: { saved: 0, suggested: 0 },
         fullhouse: { saved: 0, suggested: 0 },
-        smallstraight: { saved: 0, suggested: 0 },
-        largestraight: { saved: 0, suggested: 0 },
         yahtzee: { saved: 0, suggested: 0 },
-        chance: { saved: 0, suggested: 0 },
       }
     }
 
-    this.mapper = { 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six' }
+    this.mapper = { 1: 'ones', 2: 'twos', 3: 'threes', 4: 'fours', 5: 'fives', 6: 'sixes' }
 
     return {
-      gameDice: ()=>{
-        return this.game.dice
+      setArray: (diceArray) => {
+        return this.game.dice = diceArray;
       },
 
       setPoints: (category, score) => {
@@ -191,7 +191,13 @@ class ScoreBoard {
 
       combinedtotal: () => {
         return this.uppertotal() + this.lowertotal();
-      }
+      },
+
+      displayPossibilities: () => this.displayPossibilities(),
+
+      updateScoreCell: () => this.updateScoreCell(),
+
+      getPossibilities: () => this.getPossibilities()
     }
   }
 
@@ -202,80 +208,165 @@ class ScoreBoard {
   }
 
   getPossibilities() {
-    var currentPossible = game.dice.concat(game.hold);
-   
+    var currentPossible = this.game.dice;
 
-    var sortedDice = currentPossible.sort(function (a, b) {
-      return a - b;
+    currentPossible.forEach((number) => {
+      this.game.temp_scorecard[this.mapper[number]].suggested += number;
+
+      this.game.temp_scorecard.chance.suggested += number;
     });
+    /*
+     var smallStraightRegex = /(\d)?((1(\d)?2(\d)?3(\d)?4(\d)?5)|(2(\d)?3(\d)?4(\d)?5(\d)?6))(\d)?/g;
+     var largeStraightRegex = /(123456)/g;
+     
+     var threeOrMore = currentPossible.join('').match(/(\d)\1{2,}/g);
+    
+     var smallStraight = smallStraightRegex.test(currentPossible.join(""));
+     var largeStraight = largeStraightRegex.test(currentPossible.join(""));
+     
+     if (largeStraight) {
+       this.game.temp_scorecard.largestraight = 40;
+       this.game.temp_scorecard.smallstraight = 30;
+     } else if (smallStraight) {
+       this.game.temp_scorecard.smallstraight = 30;
+     }
+       
+     if (threeOrMore !== null) {
+       sortedDice.map(function (num) {
+         if (threeOrMore.join("").length === 5) {
+           game.temp_scorecard.fourkind += num;
+           game.temp_scorecard.threekind += num;
+           game.temp_scorecard.yahtzee = 50;
+         } else if (threeOrMore.join("").length === 4) {
+           game.temp_scorecard.fourkind += num;
+           game.temp_scorecard.threekind += num;
+         } else {
+           game.temp_scorecard.threekind += num;
+         }
+       });
+     }
+ 
+     var fullhouse = currentPossible.join('').match(/(\d)\1{2,}(\d)\2{1,}/g);
+     if (fullhouse === null) {
+       fullhouse = currentPossible.join('').match(/(\d)\1{1,}(\d)\2{2,}/g);
+     }
+     if (fullhouse) {
+       game.temp_scorecard.fullhouse = 25;
+     }
+     */
 
-    sortedDice.map(function (number) {
-      for (var i = 0; i < mapper.length; i++) {
-        game.temp_scorecard[this.mapper[number]].suggested += number
+
+
+  }
+
+
+  calcFullHouse() {
+    let three = false, two = false;
+
+    for (let i = 1; i < 7; i++) {
+      if (this.results[i] * i >= i * 3) {
+        three = i;
       }
-      game.temp_scorecard.chance += number;
-    });
-
-    if (lg_straight) {
-      game.temp_scorecard.largestraight = 40;
-      game.temp_scorecard.smallstraight = 30;
-    } else if (sm_straight) {
-      game.temp_scorecard.smallstraight = 30;
     }
 
-    if (threeOrMore !== null) {
-      sortedDice.map(function (num) {
-        if (threeOrMore.join("").length === 5) {
-          game.temp_scorecard.fourkind += num;
-          game.temp_scorecard.threekind += num;
-          game.temp_scorecard.yahtzee = 50;
-        } else if (threeOrMore.join("").length === 4) {
-          game.temp_scorecard.fourkind += num;
-          game.temp_scorecard.threekind += num;
-        } else {
-          game.temp_scorecard.threekind += num;
-        }
-      });
+    for (let i = 1; i < 7; i++) {
+      if (this.results[i] * i >= i * 2 && i != three) {
+        two = i;
+      }
     }
   }
+ 
+  calcYahtzee() {
+    let isYahtzee = false;
+    var score = 0;
+
+    for (let i = 0; i < this.mapper.length; i++) {
+      var j =1;
+      switch (this.mapper[j]) {
+        case 1:
+          if (this.game.temp_scorecard[this.mapper[i]].suggested == 6) {
+            isYahtzee = true;
+            score = 6;
+          }
+          break;
+        case 2:
+          if (this.game.temp_scorecard[this.mapper[i]].suggested == 12) {
+            isYahtzee = true;
+            score = 12;
+          }
+          break;
+        case 3:
+          if (this.game.temp_scorecard[this.mapper[i]].suggested == 18) {
+            isYahtzee = true;
+            score = 18;
+          }
+          break;
+        case 4:
+          if (this.game.temp_scorecard[this.mapper[i]].suggested == 24) {
+            isYahtzee = true;
+            score = 24;
+          }
+          break;
+        case 5:
+          if (this.game.temp_scorecard[this.mapper[i]].suggested == 30) {
+            isYahtzee = true;
+            score = 30;
+          }
+          break;
+        default:
+      }
+      j++;
+    }
+    
+    if(isYahtzee){
+      this.game.temp_scorecard.yahtzee = 50;
+    }
+   
+  }
+  
+  largeStraight(){
+    var isLargeStraight = false;
+    for(let i = 0; i < this.mapper.length; i++) {
+       if(this.game.temp_scorecard[this.mapper[i]].suggested >0){
+        isLargeStraight=true;
+       } else isLargeStraight=false;
+    }
+    if(isLargeStraight){
+      this.game.temp_scorecard.largestraight = 40;
+    }
+  }
+   
+  
 
 
-  drawTable(updateScore) {
-    document.getElementById(`${updateScore}_score`).innerHTML = this.temp_scorecard[updateScore].suggested;
+  updateScoreCell(updateScore) {
+    let scoreContainer = document.getElementById(`${updateScore}_score`);
+    let scoreValue = this.game.temp_scorecard[updateScore].suggested;
+
+    if (scoreValue > 0) {
+      scoreContainer.classList.add("highlight");
+    } else scoreContainer.classList.remove("highlight");
+
+    scoreContainer.querySelector('.score_value').innerHTML = scoreValue;
   }
 
-  chosenOption() {
-    const tds = this.document.querySelector('td');
-
-    tds.forEach(td => {
-      td.addEventListener('click', (event) => {
-        if (event.target.class == '.score_value') {
-
-        }
-      })
-    })
-  }
-
-  setScore(editId) {
-
-  }
 
   displayPossibilities() {
-    getPossibilities();
+    this.getPossibilities();
 
-    Object.keys(temp_scorecard).map(function (key) {
-      this.drawTable(key);
+    Object.keys(this.game.temp_scorecard).map((key) => {
+      this.updateScoreCell(key);
     });
   }
 
   resetTempScorecard() {
     this.temp_scorecard = {
-      one: 0,
-      two: 0,
-      three: 0,
-      four: 0,
-      five: 0,
-      six: 0,
+      ones: 0,
+      twos: 0,
+      threes: 0,
+      fours: 0,
+      fives: 0,
+      sixs: 0,
       threekind: 0,
       fourkind: 0,
       fullhouse: 0,

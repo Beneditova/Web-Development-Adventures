@@ -15,42 +15,89 @@
         <div id="container">
             <div id="cont2">
                 <h1>Roll random dice</h1>
-                <h2>let's see if your are lucky</h2>
+                <h2>let's see if you are lucky</h2>
             </div>
           
-            <table class="score_board">
+            <table class="first_score_board">
               <thead>
-                <tr><th>Upper Section</th>
+                <tr><th>🎲</th>
                 <th>Score</th></tr>
               </thead>
               <tbody>
-                <tr id="aces_score">
+                <tr id="ones_score">
                   <td>Aces</td>
-                  <td class="score_value">5</td>
+                  <td class="score_value"></td>
                 </tr>
                 <tr id="twos_score">
                   <td>Twos</td>
-                  <td class="score_value">5</td>
+                  <td class="score_value"></td>
                 </tr>
                 <tr id="threes_score">
                     <td>Threes</td>
-                    <td class="score_value">5</td>
+                    <td class="score_value"></td>
                   </tr>
                   <tr id="fours_score">
                       <td>Fours</td>
-                      <td class="score_value">5</td>
+                      <td class="score_value"></td>
                     </tr>
                     <tr id="fives_score">
                         <td>Fives</td>
-                        <td class="score_value">5</td>
+                        <td class="score_value"></td>
                       </tr>
                       <tr id="sixes_score">
                           <td>Sixes</td>
-                          <td class="score_value">5</td>
+                          <td class="score_value"></td>
                         </tr>
+                        <tr id="bonus_score">
+                            <td>Bonus</td>
+                            <td class="score_value"></td>
+                          </tr>
               </tbody>
             </table>
-            
+            <table class="second_score_board">
+                <thead>
+                  <tr><th>🎲</th>
+                  <th>Score</th></tr>
+                </thead>
+                <tbody>
+                  <tr id="threekind_score">
+                    <td>Three of a kind</td>
+                    <td class="score_value"></td>
+                  </tr>
+                  <tr id="fourkind_score">
+                    <td>Four of a kind</td>
+                    <td class="score_value"></td>
+                  </tr>
+                  <tr id="fullhouse_score">
+                      <td>Full house</td>
+                      <td class="score_value"></td>
+                    </tr>
+                    <tr id="smallstraight_score">
+                        <td>Small straight</td>
+                        <td class="score_value"></td>
+                      </tr>
+                      <tr id="largestraight_score">
+                          <td>Large straight</td>
+                          <td class="score_value"></td>
+                        </tr>
+                        <tr id="chance_score">
+                            <td>Chance</td>
+                            <td class="score_value"></td>
+                          </tr>
+                          <tr id="yahtzee_score">
+                              <td>YAHTZEE</td>
+                              <td class="score_value"></td>
+                            </tr>
+                </tbody>
+              </table>
+            <table  class="sum_score_board">
+                <tbody>
+                    <tr id="one_score">
+                        <td>Total Score</td>
+                        <td class="score_value"></td>
+                      </tr>
+                </tbody>
+            </table>
             <div class="dice_wrapper">
                     <h3>Good Luck Champ</h3>
  
@@ -131,7 +178,10 @@
                
                 <script src="js/dice.js" charset="utf-8"></script>
                <script>
-                   var yahtzeeGame= new YahtzeeGame({buttonId: "#rollDiceButton", container: ".dice_wrapper"});
+                 window.onload = () => {
+                  var yahtzeeGame= new YahtzeeGame({buttonId: "#rollDiceButton", container: ".dice_wrapper"});
+                           };
+                  
               </script>
     </body>
  

@@ -1,5 +1,5 @@
 * {
-    color: white;
+    color: #c4d0d5;
 }
 div.colored {
     background-color: blue;
@@ -41,7 +41,7 @@ h3 {
 }
 
 table{
-    width: 400px;
+    width: 250px;
 }
 
 th{
@@ -49,10 +49,28 @@ th{
 }
 
 table, th, td{
-    border: 1px solid #000;
-    border-collapse:  collapse;
+    border: 1px solid#7486c8;
 }
 
+.first_score_board {
+    float: left;
+    margin-left: 22%;
+}
+
+.second_score_board{
+    float: left; 
+    margin-left: 22%;
+}
+
+.sum_score_board{
+    width: 20%;
+    margin-left: 39%;
+    margin-top: 21%;
+}
+
+.sum_score_board td{
+    width: 12%;
+}
 
 button {
     background-color: rgb(82, 186, 179);
@@ -70,7 +88,7 @@ button {
 }
 
 .highlight{
-    background-color: antiquewhite;
+    background-color:#4c5a99;
 }
 
 .dice_wrapper {
