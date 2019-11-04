@@ -22,12 +22,12 @@ class Die {
       6: ["dice_dot_1", "dice_dot_3", "dice_dot_4", "dice_dot_6", "dice_dot_7", "dice_dot_9"]
     };
 
-    window.onload = () => {
+   
       this.element.addEventListener('click', () => {
         this.selectedState = !this.selectedState;
-        this.updateDie();
+        this.dieSelected();
       });
-    };
+    
 
     return {
       getSelectedState: () => {
@@ -37,8 +37,10 @@ class Die {
       setDie: (die) => {
         self.currentDie = die;
         self.draw();
-      }
-    }
+      },
+      
+      checkSelection: () => this.checkSelection()
+     }
   }
 
   draw() {
@@ -64,6 +66,7 @@ class Die {
     this.element.querySelectorAll(" div").forEach(x => x.classList.remove('colored'));
   }
 
+ 
   resetSelected() {
     if (this.element.classList.contains('selected')) {
       this.element.classList.remove('selected');
@@ -71,9 +74,17 @@ class Die {
   }
 
   dieSelected() {
-    if (document.querySelectorAll('.selected').length < 4) {
+    if (this.element.classList.contains('selected')) {
+      this.element.classList.remove('selected');
+    }else if (document.querySelectorAll('.selected').length < 5) {
       this.element.classList.add('selected');
     }
+  }
+
+  checkSelection(){
+    if (this.element.classList.contains('selected')) {
+      return true;
+    }else return false;
   }
 }
 
@@ -123,7 +134,7 @@ class YahtzeeGame {
     for (var i = 0; i < randomNumbersHolder.length; i++) {
       randomNumbersHolder[i] = (Math.floor(Math.random() * 6) + 1);
     }
-
+    console.log(randomNumbersHolder);
     return randomNumbersHolder;
   }
 
@@ -132,13 +143,17 @@ class YahtzeeGame {
 
     var scoreBoard = new ScoreBoard();
     scoreBoard.setArray(diceNumber);
+    scoreBoard.resetTempScorecard();
 
     console.log(scoreBoard.gameDice);
 
     scoreBoard.displayPossibilities();
 
     diceNumber.forEach((number, index) => {
-      this.dices[`die${index + 1}`].setDie(diceNumber[index])
+      if(this.dices[`die${index + 1}`].checkSelection()){
+
+      } else this.dices[`die${index + 1}`].setDie(diceNumber[index]);
+      
     })
   }
 }
@@ -197,7 +212,9 @@ class ScoreBoard {
 
       updateScoreCell: () => this.updateScoreCell(),
 
-      getPossibilities: () => this.getPossibilities()
+      getPossibilities: () => this.getPossibilities(),
+      
+      resetTempScorecard: () => this.resetTempScorecard()
     }
   }
 
@@ -208,135 +225,161 @@ class ScoreBoard {
   }
 
   getPossibilities() {
-    var currentPossible = this.game.dice;
+  var currentPossible = []
+  currentPossible=this.game.dice;
+  
 
     currentPossible.forEach((number) => {
       this.game.temp_scorecard[this.mapper[number]].suggested += number;
 
       this.game.temp_scorecard.chance.suggested += number;
     });
-    /*
-     var smallStraightRegex = /(\d)?((1(\d)?2(\d)?3(\d)?4(\d)?5)|(2(\d)?3(\d)?4(\d)?5(\d)?6))(\d)?/g;
-     var largeStraightRegex = /(123456)/g;
-     
-     var threeOrMore = currentPossible.join('').match(/(\d)\1{2,}/g);
-    
-     var smallStraight = smallStraightRegex.test(currentPossible.join(""));
-     var largeStraight = largeStraightRegex.test(currentPossible.join(""));
-     
-     if (largeStraight) {
-       this.game.temp_scorecard.largestraight = 40;
-       this.game.temp_scorecard.smallstraight = 30;
-     } else if (smallStraight) {
-       this.game.temp_scorecard.smallstraight = 30;
-     }
-       
-     if (threeOrMore !== null) {
-       sortedDice.map(function (num) {
-         if (threeOrMore.join("").length === 5) {
-           game.temp_scorecard.fourkind += num;
-           game.temp_scorecard.threekind += num;
-           game.temp_scorecard.yahtzee = 50;
-         } else if (threeOrMore.join("").length === 4) {
-           game.temp_scorecard.fourkind += num;
-           game.temp_scorecard.threekind += num;
-         } else {
-           game.temp_scorecard.threekind += num;
-         }
-       });
-     }
- 
-     var fullhouse = currentPossible.join('').match(/(\d)\1{2,}(\d)\2{1,}/g);
-     if (fullhouse === null) {
-       fullhouse = currentPossible.join('').match(/(\d)\1{1,}(\d)\2{2,}/g);
-     }
-     if (fullhouse) {
-       game.temp_scorecard.fullhouse = 25;
-     }
-     */
 
-
-
+    this.calculateSmallStraight();
+    this.calculateLargeStraight();
+    this.calculateThreeofakindOrMore();
   }
 
+  calculateThreeofakindOrMore() {
+    let isYahtzee = false, hasThreeOfAKind = false, hasFourOfAKind = false, hasPair = false;
 
-  calcFullHouse() {
-    let three = false, two = false;
-
-    for (let i = 1; i < 7; i++) {
-      if (this.results[i] * i >= i * 3) {
-        three = i;
-      }
-    }
+    let threeOfAKindPoints = 0, fourOfAKindPoints = 0;
 
     for (let i = 1; i < 7; i++) {
-      if (this.results[i] * i >= i * 2 && i != three) {
-        two = i;
-      }
-    }
-  }
- 
-  calcYahtzee() {
-    let isYahtzee = false;
-    var score = 0;
-
-    for (let i = 0; i < this.mapper.length; i++) {
-      var j =1;
-      switch (this.mapper[j]) {
-        case 1:
-          if (this.game.temp_scorecard[this.mapper[i]].suggested == 6) {
+      var score = this.game.temp_scorecard[this.mapper[i]].suggested;
+     
+      switch (this.mapper[i]) {
+        case 'ones':
+          if (score == 6) {
             isYahtzee = true;
-            score = 6;
+          } else if (score == 4) {
+            hasFourOfAKind = true;
+            fourOfAKindPoints = 4;
+          }
+          else if (score == 3) {
+            hasThreeOfAKind = true;
+            threeOfAKindPoints = score;
+          } else if (score == 2) {
+            hasPair = true;
           }
           break;
-        case 2:
-          if (this.game.temp_scorecard[this.mapper[i]].suggested == 12) {
+        case 'twos':
+          if (score == 12) {
             isYahtzee = true;
-            score = 12;
+          } else if (score == 8) {
+            hasFourOfAKind = true;
+            fourOfAKindPoints = 8;
+          } else if (score == 6) {
+            hasThreeOfAKind = true;
+            threeOfAKindPoints = score;
+          } else if (score == 4) {
+            hasPair = true;
           }
           break;
-        case 3:
+        case 'threes':
           if (this.game.temp_scorecard[this.mapper[i]].suggested == 18) {
             isYahtzee = true;
-            score = 18;
+          } else if (score == 12) {
+            hasFourOfAKind = true;
+            fourOfAKindPoints = 12;
+          } else if (score == 9) {
+            hasThreeOfAKind = true;
+            threeOfAKindPoints = score;
+          } else if (score == 6) {
+            hasPair = true;
           }
           break;
-        case 4:
-          if (this.game.temp_scorecard[this.mapper[i]].suggested == 24) {
+        case 'fours':
+          if (score == 24) {
             isYahtzee = true;
-            score = 24;
+          } else if (score == 16) {
+            hasFourOfAKind = true;
+            fourOfAKindPoints = 16;
+          } else if (score == 12) {
+            hasThreeOfAKind = true;
+            threeOfAKindPoints = score;
+          } else if (score == 8) {
+            hasPair = true;
           }
           break;
-        case 5:
-          if (this.game.temp_scorecard[this.mapper[i]].suggested == 30) {
+        case 'fives':
+          if (score == 30) {
             isYahtzee = true;
-            score = 30;
+          } else if (score == 20) {
+            hasFourOfAKind = true;
+            fourOfAKindPoints = 20;
+          } else if (score == 15) {
+            hasThreeOfAKind = true;
+            threeOfAKindPoints = score;
+          } else if (score == 10) {
+            hasPair = true;
+          }
+          break;
+        case 'sixes':
+          if (score == 36) {
+            isYahtzee = true;
+          } else if (score == 24) {
+            hasFourOfAKind = true;
+            fourOfAKindPoints = 24;
+          } else if (score == 18) {
+            hasThreeOfAKind = true;
+            threeOfAKindPoints = score;
+          } else if (score == 12) {
+            hasPair = true;
           }
           break;
         default:
       }
-      j++;
+    }
+
+    if (isYahtzee) {
+      this.game.temp_scorecard.yahtzee.suggested = 50;
+    }
+    if (hasFourOfAKind) {
+      this.game.temp_scorecard.fourkind.suggested = fourOfAKindPoints;
+    }
+    if (hasThreeOfAKind) {
+      this.game.temp_scorecard.threekind.suggested = threeOfAKindPoints;
+    }
+    if (hasThreeOfAKind && hasPair) {
+      this.game.temp_scorecard.fullhouse.suggested = 25;
+    }
+  }
+
+  calculateLargeStraight() {
+    var isLargeStraight = false;
+    for (let i = 1; i < 7; i++) {
+      if (this.game.temp_scorecard[this.mapper[i]].suggested > 0) {
+        isLargeStraight = true;
+      } else isLargeStraight = false;
+    }
+   
+    if (isLargeStraight) {
+      this.game.temp_scorecard.largestraight.suggested = 40;
+    }
+  }
+
+  calculateSmallStraight() {
+    var smallStraightFirstType = false, smallStraightSecondType = false;
+    
+    for (let i = 1; i < this.mapper.length-1; i++) {
+      if (this.game.temp_scorecard[this.mapper[i]].suggested > 0) {
+        smallStraightFirstType = true;
+      } else smallStraightFirstType = false;
     }
     
-    if(isYahtzee){
-      this.game.temp_scorecard.yahtzee = 50;
+    for (let i = 2; i < this.mapper.length; i++) {
+      if (this.game.temp_scorecard[this.mapper[i]].suggested > 0) {
+        smallStraightSecondType = true;
+      } else smallStraightSecondType = false;
     }
-   
-  }
-  
-  largeStraight(){
-    var isLargeStraight = false;
-    for(let i = 0; i < this.mapper.length; i++) {
-       if(this.game.temp_scorecard[this.mapper[i]].suggested >0){
-        isLargeStraight=true;
-       } else isLargeStraight=false;
-    }
-    if(isLargeStraight){
-      this.game.temp_scorecard.largestraight = 40;
+
+    if (smallStraightFirstType||smallStraightSecondType) {
+      this.game.temp_scorecard.smallstraight.suggested = 30;
     }
   }
-   
-  
+
+
 
 
   updateScoreCell(updateScore) {
