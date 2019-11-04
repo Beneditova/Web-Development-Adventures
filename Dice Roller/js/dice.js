@@ -35,9 +35,10 @@ class Die {
       },
 
       setDie: (die) => {
-        self.currentDie = die;
-        self.draw();
+        this.currentDie = die;
+         this.draw();
       },
+      
       
       checkSelection: () => this.checkSelection()
      }
@@ -61,7 +62,7 @@ class Die {
   }
 
   resetDie() {
-    this.resetSelected();
+   // this.resetSelected();
 
     this.element.querySelectorAll(" div").forEach(x => x.classList.remove('colored'));
   }
@@ -109,23 +110,10 @@ class YahtzeeGame {
     // this.rollDice = this.rollDice.bind(this);
     // this.roundRoll = this.roundRoll.bind(this);
 
-    return {
-      Die1: () => {
-        return this.dice.die1;
-      }, Die2: () => {
-        return this.dice.die2;
-      }, Die3: () => {
-        return this.dice.die3;
-      }, Die4: () => {
-        return this.dice.die4;
-      }, Die5: () => {
-        return this.dice.die5;
-      }, Die6: () => {
-        return this.dice.die6;
-      },
+    
       // rollDice: this.rollDice,
       // roundRoll: this.roundRoll
-    }
+    
   }
 
   roundRoll() {
@@ -139,8 +127,19 @@ class YahtzeeGame {
   }
 
   rollDice() {
+   
     var diceNumber = this.roundRoll();
 
+    diceNumber.forEach((number, index) => {
+      if(this.dices[`die${index + 1}`].checkSelection()){
+         diceNumber[index] 
+      } else this.dices[`die${index + 1}`].setDie(diceNumber[index]);
+      
+    })
+    Object.values(this.dices).forEach(die =>{
+      console.log(die);
+    })
+   
     var scoreBoard = new ScoreBoard();
     scoreBoard.setArray(diceNumber);
     scoreBoard.resetTempScorecard();
@@ -148,13 +147,8 @@ class YahtzeeGame {
     console.log(scoreBoard.gameDice);
 
     scoreBoard.displayPossibilities();
-
-    diceNumber.forEach((number, index) => {
-      if(this.dices[`die${index + 1}`].checkSelection()){
-
-      } else this.dices[`die${index + 1}`].setDie(diceNumber[index]);
-      
-    })
+    
+   
   }
 }
 
