@@ -102,7 +102,7 @@ class YahtzeeGame {
       die6: new Die(`${options.container} #dice_6`),
     }
 
-
+     this.oldDiceHolder = []
 
     this.rollButton = document.querySelector(`${options.buttonId}`)
     this.rollButton.addEventListener('click', () => { this.rollDice(); });
@@ -125,17 +125,19 @@ class YahtzeeGame {
     console.log(randomNumbersHolder);
     return randomNumbersHolder;
   }
-
-  rollDice() {
    
+  rollDice() {
+    
     var diceNumber = this.roundRoll();
 
     diceNumber.forEach((number, index) => {
       if(this.dices[`die${index + 1}`].checkSelection()){
-         diceNumber[index] 
-      } else this.dices[`die${index + 1}`].setDie(diceNumber[index]);
-      
+        diceNumber[index] = this.oldDiceHolder[index];
+      } else{
+         this.dices[`die${index + 1}`].setDie(number);
+      } 
     })
+   
     Object.values(this.dices).forEach(die =>{
       console.log(die);
     })
@@ -148,7 +150,7 @@ class YahtzeeGame {
 
     scoreBoard.displayPossibilities();
     
-   
+    this.oldDiceHolder = diceNumber.slice();
   }
 }
 
@@ -158,7 +160,7 @@ class ScoreBoard {
     this.game = {
       round: 1,
       count: 3,
-      hold: [],
+     
       dice: [],
       temp_scorecard: {
         ones: { saved: 0, suggested: 0 },
@@ -183,6 +185,10 @@ class ScoreBoard {
     return {
       setArray: (diceArray) => {
         return this.game.dice = diceArray;
+      },
+
+      gameDice: () => {
+        return this.game.dice;
       },
 
       setPoints: (category, score) => {
@@ -214,7 +220,6 @@ class ScoreBoard {
 
   newRound() {
     game.count = 3;
-    game.hold = [];
     game.dice = [];
   }
 
@@ -343,9 +348,9 @@ class ScoreBoard {
   calculateLargeStraight() {
     var isLargeStraight = false;
     for (let i = 1; i < 7; i++) {
-      if (this.game.temp_scorecard[this.mapper[i]].suggested > 0) {
-        isLargeStraight = true;
-      } else isLargeStraight = false;
+      if (this.game.temp_scorecard[this.mapper[i]].suggested == 0) {
+        isLargeStraight = false;
+      } else isLargeStraight = true;
     }
    
     if (isLargeStraight) {
