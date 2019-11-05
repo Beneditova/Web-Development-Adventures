@@ -39,8 +39,7 @@ class Die {
          this.draw();
       },
       
-      
-      checkSelection: () => this.checkSelection()
+      checkSelection: () => this.checkSelection(),
      }
   }
 
@@ -180,9 +179,24 @@ class ScoreBoard {
       }
     }
 
+    
     this.mapper = { 1: 'ones', 2: 'twos', 3: 'threes', 4: 'fours', 5: 'fives', 6: 'sixes' }
 
-    return {
+     this.table = document.querySelectorAll("#score_container .score_value");
+     this.table.forEach(el => {
+      el.addEventListener('click', (e) => {
+       // console.log("hallo");
+        console.log({x: e});
+        
+        var parent = el.parentElement.nodeName;
+        console.log(el.getAttribute('data-id'));
+
+        this.fixPoints(el.getAttribute('data-id'));
+      });
+     })
+    
+   
+   return {
       setArray: (diceArray) => {
         return this.game.dice = diceArray;
       },
@@ -221,6 +235,11 @@ class ScoreBoard {
   newRound() {
     game.count = 3;
     game.dice = [];
+  }
+  
+  fixPoints(pointsName){
+   // this.game.temp_scorecard[pointsName].saved = this.game.temp_scorecard[pointsName].suggested ;
+    document.getElementById(`${pointsName}_score`).classList.add("fixedHighlight");
   }
 
   getPossibilities() {

@@ -57,7 +57,7 @@ var button = document.getElementById("button");
       
       index++;
 
-     for(var i=0; i< visibleDots.length; i++) {
+      for(var i=0; i< visibleDots.length; i++) {
      
       var dot = holder.querySelectorAll(`[data-id="${visibleDots[i]}"]`)[0];
       dot.classList.add('colored');

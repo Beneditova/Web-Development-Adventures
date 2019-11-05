@@ -1,190 +1,197 @@
 <!doctype html>
 <html class="no-js" lang="">
 
-    <head>
-    <meta charset="utf-8">
-    <title>The Dice Roller</title>
+<head>
+  <meta charset="utf-8">
+  <title>The Dice Roller</title>
 
-    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 
-    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster" rel="stylesheet">
 
-    </head>
+</head>
 
 <body>
-        <div id="container">
-            <div id="cont2">
-                <h1>Roll random dice</h1>
-                <h2>let's see if you are lucky</h2>
-            </div>
-          
-            <table class="first_score_board">
-              <thead>
-                <tr><th>🎲</th>
-                <th>Score</th></tr>
-              </thead>
-              <tbody>
-                <tr id="ones_score">
-                  <td>Aces</td>
-                  <td class="score_value"></td>
-                </tr>
-                <tr id="twos_score">
-                  <td>Twos</td>
-                  <td class="score_value"></td>
-                </tr>
-                <tr id="threes_score">
-                    <td>Threes</td>
-                    <td class="score_value"></td>
-                  </tr>
-                  <tr id="fours_score">
-                      <td>Fours</td>
-                      <td class="score_value"></td>
-                    </tr>
-                    <tr id="fives_score">
-                        <td>Fives</td>
-                        <td class="score_value"></td>
-                      </tr>
-                      <tr id="sixes_score">
-                          <td>Sixes</td>
-                          <td class="score_value"></td>
-                        </tr>
-                        <tr id="bonus_score">
-                            <td>Bonus</td>
-                            <td class="score_value"></td>
-                          </tr>
-              </tbody>
-            </table>
-            <table class="second_score_board">
-                <thead>
-                  <tr><th>🎲</th>
-                  <th>Score</th></tr>
-                </thead>
-                <tbody>
-                  <tr id="threekind_score">
-                    <td>Three of a kind</td>
-                    <td class="score_value">2</td>
-                  </tr>
-                  <tr id="fourkind_score">
-                    <td>Four of a kind</td>
-                    <td class="score_value">2</td>
-                  </tr>
-                  <tr id="fullhouse_score">
-                      <td>Full house</td>
-                      <td class="score_value">2</td>
-                    </tr>
-                    <tr id="smallstraight_score">
-                        <td>Small straight</td>
-                        <td class="score_value">2</td>
-                      </tr>
-                      <tr id="largestraight_score">
-                          <td>Large straight</td>
-                          <td class="score_value">2</td>
-                        </tr>
-                        <tr id="chance_score">
-                            <td>Chance</td>
-                            <td class="score_value">2</td>
-                          </tr>
-                          <tr id="yahtzee_score">
-                              <td>YAHTZEE</td>
-                              <td class="score_value">2</td>
-                            </tr>
-                </tbody>
-              </table>
-            <table  class="sum_score_board">
-                <tbody>
-                    <tr id="one_score">
-                        <td>Total Score</td>
-                        <td class="score_value"></td>
-                      </tr>
-                </tbody>
-            </table>
-            <div class="dice_wrapper">
-                    <h3>Good Luck Champ</h3>
- 
-                    <div class="yahtzee_die" id="dice_1">
-                        <div data-id="dice_dot_1"></div>
-                        <div data-id="dice_dot_2"></div>
-                        <div data-id="dice_dot_3"></div>
-                        <div data-id="dice_dot_4"></div>
-                        <div data-id="dice_dot_5"></div>
-                        <div data-id="dice_dot_6"></div>
-                        <div data-id="dice_dot_7"></div>
-                        <div data-id="dice_dot_8"></div>
-                        <div data-id="dice_dot_9"></div>
-                    </div>
- 
-                    <div class="yahtzee_die" id="dice_2">
-                      <div data-id="dice_dot_1"></div>
-                      <div data-id="dice_dot_2"></div>
-                      <div data-id="dice_dot_3"></div>
-                      <div data-id="dice_dot_4"></div>
-                      <div data-id="dice_dot_5"></div>
-                      <div data-id="dice_dot_6"></div>
-                      <div data-id="dice_dot_7"></div>
-                      <div data-id="dice_dot_8"></div>
-                      <div data-id="dice_dot_9"></div>
-                    </div>
- 
-                    <div class="yahtzee_die" id="dice_3">
-                      <div data-id="dice_dot_1"></div>
-                      <div data-id="dice_dot_2"></div>
-                      <div data-id="dice_dot_3"></div>
-                      <div data-id="dice_dot_4"></div>
-                      <div data-id="dice_dot_5"></div>
-                      <div data-id="dice_dot_6"></div>
-                      <div data-id="dice_dot_7"></div>
-                      <div data-id="dice_dot_8"></div>
-                      <div data-id="dice_dot_9"></div>
-                    </div>
- 
-                    <div class="yahtzee_die" id="dice_4">
-                      <div data-id="dice_dot_1"></div>
-                      <div data-id="dice_dot_2"></div>
-                      <div data-id="dice_dot_3"></div>
-                      <div data-id="dice_dot_4"></div>
-                      <div data-id="dice_dot_5"></div>
-                      <div data-id="dice_dot_6"></div>
-                      <div data-id="dice_dot_7"></div>
-                      <div data-id="dice_dot_8"></div>
-                      <div data-id="dice_dot_9"></div>
-                    </div>
- 
-                    <div class="yahtzee_die" id="dice_5">
-                      <div data-id="dice_dot_1"></div>
-                      <div data-id="dice_dot_2"></div>
-                      <div data-id="dice_dot_3"></div>
-                      <div data-id="dice_dot_4"></div>
-                      <div data-id="dice_dot_5"></div>
-                      <div data-id="dice_dot_6"></div>
-                      <div data-id="dice_dot_7"></div>
-                      <div data-id="dice_dot_8"></div>
-                      <div data-id="dice_dot_9"></div>
-                    </div>
- 
-                    <div class="yahtzee_die" id="dice_6">
-                      <div data-id="dice_dot_1"></div>
-                      <div data-id="dice_dot_2"></div>
-                      <div data-id="dice_dot_3"></div>
-                      <div data-id="dice_dot_4"></div>
-                      <div data-id="dice_dot_5"></div>
-                      <div data-id="dice_dot_6"></div>
-                      <div data-id="dice_dot_7"></div>
-                      <div data-id="dice_dot_8"></div>
-                      <div data-id="dice_dot_9"></div>
-                    </div>
-                </div>
-          </div>
-                <button id="rollDiceButton">Roll Dice</button>
-               
-                <script src="js/dice.js" charset="utf-8"></script>
-               <script>
-                 window.onload = () => {
-                  var yahtzeeGame= new YahtzeeGame({buttonId: "#rollDiceButton", container: ".dice_wrapper"});
-                           };
-                  
-              </script>
-    </body>
- 
-    <footer>
-    Roll them Dicee
-    </footer>
+  <div id="container">
+    <div id="cont2">
+      <h1>Roll random dice</h1>
+      <h2>let's see if you are lucky</h2>
+    </div>
+    <div id="score_container">
+      <table class="first_score_board">
+        <thead>
+          <tr>
+            <th>🎲</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="ones_score">
+            <td>Aces</td>
+            <td class="score_value"  data-id="ones"></td>
+          </tr>
+          <tr id="twos_score">
+            <td>Twos</td>
+            <td class="score_value"  data-id="twos"></td>
+          </tr>
+          <tr id="threes_score">
+            <td>Threes</td>
+            <td class="score_value"  data-id="threes"></td>
+          </tr>
+          <tr id="fours_score">
+            <td>Fours</td>
+            <td class="score_value"  data-id="fours"></td>
+          </tr>
+          <tr id="fives_score">
+            <td>Fives</td>
+            <td class="score_value"  data-id="fives"></td>
+          </tr>
+          <tr id="sixes_score">
+            <td>Sixes</td>
+            <td class="score_value"  data-id="sixes"></td>
+          </tr>
+          <tr id="bonus_score">
+            <td>Bonus</td>
+            <td class="score_value"  data-id="bonus"></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="second_score_board">
+        <thead>
+          <tr>
+            <th>🎲</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="threekind_score">
+            <td>Three of a kind</td>
+            <td class="score_value"  data-id="threekind">2</td>
+          </tr>
+          <tr id="fourkind_score">
+            <td>Four of a kind</td>
+            <td class="score_value"  data-id="fourkind">2</td>
+          </tr>
+          <tr id="fullhouse_score">
+            <td>Full house</td>
+            <td class="score_value"  data-id="fullhouse">2</td>
+          </tr>
+          <tr id="smallstraight_score">
+            <td>Small straight</td>
+            <td class="score_value"  data-id="smallstraight">2</td>
+          </tr>
+          <tr id="largestraight_score">
+            <td>Large straight</td>
+            <td class="score_value"  data-id="largestraight">2</td>
+          </tr>
+          <tr id="chance_score">
+            <td>Chance</td>
+            <td class="score_value"  data-id="chance">2</td>
+          </tr>
+          <tr id="yahtzee_score">
+            <td>YAHTZEE</td>
+            <td class="score_value"  data-id="yahtzee">2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <table class="sum_score_board">
+      <tbody>
+        <tr id="one_score">
+          <td>Total Score</td>
+          <td class="score_value"  data-id="ones"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="dice_wrapper">
+      <h3>Good Luck Champ</h3>
+
+      <div class="yahtzee_die" id="dice_1">
+        <div data-id="dice_dot_1"></div>
+        <div data-id="dice_dot_2"></div>
+        <div data-id="dice_dot_3"></div>
+        <div data-id="dice_dot_4"></div>
+        <div data-id="dice_dot_5"></div>
+        <div data-id="dice_dot_6"></div>
+        <div data-id="dice_dot_7"></div>
+        <div data-id="dice_dot_8"></div>
+        <div data-id="dice_dot_9"></div>
+      </div>
+
+      <div class="yahtzee_die" id="dice_2">
+        <div data-id="dice_dot_1"></div>
+        <div data-id="dice_dot_2"></div>
+        <div data-id="dice_dot_3"></div>
+        <div data-id="dice_dot_4"></div>
+        <div data-id="dice_dot_5"></div>
+        <div data-id="dice_dot_6"></div>
+        <div data-id="dice_dot_7"></div>
+        <div data-id="dice_dot_8"></div>
+        <div data-id="dice_dot_9"></div>
+      </div>
+
+      <div class="yahtzee_die" id="dice_3">
+        <div data-id="dice_dot_1"></div>
+        <div data-id="dice_dot_2"></div>
+        <div data-id="dice_dot_3"></div>
+        <div data-id="dice_dot_4"></div>
+        <div data-id="dice_dot_5"></div>
+        <div data-id="dice_dot_6"></div>
+        <div data-id="dice_dot_7"></div>
+        <div data-id="dice_dot_8"></div>
+        <div data-id="dice_dot_9"></div>
+      </div>
+
+      <div class="yahtzee_die" id="dice_4">
+        <div data-id="dice_dot_1"></div>
+        <div data-id="dice_dot_2"></div>
+        <div data-id="dice_dot_3"></div>
+        <div data-id="dice_dot_4"></div>
+        <div data-id="dice_dot_5"></div>
+        <div data-id="dice_dot_6"></div>
+        <div data-id="dice_dot_7"></div>
+        <div data-id="dice_dot_8"></div>
+        <div data-id="dice_dot_9"></div>
+      </div>
+
+      <div class="yahtzee_die" id="dice_5">
+        <div data-id="dice_dot_1"></div>
+        <div data-id="dice_dot_2"></div>
+        <div data-id="dice_dot_3"></div>
+        <div data-id="dice_dot_4"></div>
+        <div data-id="dice_dot_5"></div>
+        <div data-id="dice_dot_6"></div>
+        <div data-id="dice_dot_7"></div>
+        <div data-id="dice_dot_8"></div>
+        <div data-id="dice_dot_9"></div>
+      </div>
+
+      <div class="yahtzee_die" id="dice_6">
+        <div data-id="dice_dot_1"></div>
+        <div data-id="dice_dot_2"></div>
+        <div data-id="dice_dot_3"></div>
+        <div data-id="dice_dot_4"></div>
+        <div data-id="dice_dot_5"></div>
+        <div data-id="dice_dot_6"></div>
+        <div data-id="dice_dot_7"></div>
+        <div data-id="dice_dot_8"></div>
+        <div data-id="dice_dot_9"></div>
+      </div>
+    </div>
+  </div>
+  <button id="rollDiceButton">Roll Dice</button>
+
+  <script src="js/dice.js" charset="utf-8"></script>
+  <script>
+    window.onload = () => {
+      var yahtzeeGame = new YahtzeeGame({ buttonId: "#rollDiceButton", container: ".dice_wrapper" });
+      yahtzeeGame.rollDice();
+    };
+
+  </script>
+</body>
+
+<footer>
+  Roll them Dicee
+</footer>

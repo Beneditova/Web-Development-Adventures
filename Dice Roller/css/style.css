@@ -90,7 +90,9 @@ button {
 .highlight{
     background-color:#4c5a99;
 }
-
+ .fixedHighlight{
+    background-color:#694d78;
+ }
 .dice_wrapper {
     display: flex;
     justify-content: space-around;
