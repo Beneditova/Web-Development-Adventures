@@ -1,0 +1,129 @@
+* {
+  text-align: center;
+}
+
+
+.container {
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+
+.dice {
+  text-align: center;
+  display: inline-block;
+
+}
+
+body {
+  background-color: #393E46;
+}
+
+h1 {
+  margin: 30px;
+  font-family: 'Lobster', cursive;
+  text-shadow: 5px 0 #232931;
+  font-size: 8rem;
+  color: #4ECCA3;
+}
+
+p {
+  font-size: 2rem;
+  color: #4ECCA3;
+  font-family: 'Indie Flower', cursive;
+}
+
+img {
+  width: 80%;
+}
+
+footer {
+  margin-top: 5%;
+  color: #EEEEEE;
+  text-align: center;
+  font-family: 'Indie Flower', cursive;
+
+}
+
+button {
+  background-color: rgb(82, 186, 179);
+  border-radius: 6px;
+  border: none;
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  text-transform: uppercase;
+  width: 200px;
+  cursor: pointer;
+}
+
+#placeholder {
+  height: 100px;
+  width: 100px;
+  padding: 50px;
+  margin: 50px auto;
+  border: 1px solid gray;
+  border-radius: 10px;
+  font-size:80px;
+}
+
+#placeholderDice {
+  height: 100px;
+  width: 100px;
+  padding: 50px;
+  margin: 50px auto;
+  border: 1px solid gray;
+  border-radius: 10px;
+  font-size:80px;
+}
+
+.middleDots {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 64%;
+    margin: 44px 24px 44px;
+    background-color: #333;
+  }
+
+  .leftDots{
+      display: block;
+      width: 50px;
+      height: 50px;
+      border-radius: 64%;
+      margin: -118px -34px;
+      background-color: #333;
+    }
+
+    .rightDots{
+        display: block;
+        width: 50px;
+        height: 50px;
+        border-radius: 64%;
+        margin: -186px 87px;
+        background-color: #333;
+      }
+
+
+#letf{
+      margin: 47px 24px 44px;
+  }
+
+#topMiddleDot{
+margin: -45px 23px -26px
+}
+
+#lowestMiddleDot{
+margin: -24px 24px;
+}
+
+#lowestLeftDot{
+  margin: 203px -35px;
+}
+
+#lowestRightDot{
+margin: 67px 84px;
+}
+
+#topRightDot{
+  margin: -253px 88px 68px;
+}
