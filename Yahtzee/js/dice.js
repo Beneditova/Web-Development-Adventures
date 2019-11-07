@@ -57,8 +57,6 @@ class Die {
   }
 
   resetDie() {
-    // this.resetSelected();
-
     this.element.querySelectorAll(" div").forEach(x => x.classList.remove('colored'));
   }
 
@@ -289,9 +287,13 @@ class ScoreBoard {
   }
 
   calculateThreeofakindOrMore() {
-    let isYahtzee = false, hasThreeOfAKind = false, hasFourOfAKind = false, hasPair = false;
+    let isYahtzee = false, 
+        hasThreeOfAKind = false, 
+        hasFourOfAKind = false, 
+        hasPair = false;
 
-    let threeOfAKindPoints = 0, fourOfAKindPoints = 0;
+    let threeOfAKindPoints = 0, 
+        fourOfAKindPoints = 0;
 
     for (let i = 1; i < 7; i++) {
       var score = this.game.temp_scorecard[this.mapper[i]].suggested;
