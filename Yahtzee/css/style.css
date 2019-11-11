@@ -47,9 +47,9 @@ h3 {
 }
 
 input[type=text], select {
-    width: 10%;
-    padding: 6px 8px;
-    /* margin: 20px 0; */
+    width: 16.5%;
+    padding: 5px 5px;
+    margin: 0.5% 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
