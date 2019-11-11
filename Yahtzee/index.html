@@ -17,6 +17,11 @@
       <h1>Roll random dice</h1>
       <h2>let's see if you are lucky 🍀</h2>
     </div>
+    
+      <label  for="fname">Username :</label>
+      <input class="username" type="text" id="fname" name="firstname" placeholder="Your name..">
+   
+  
     <div id="score_container">
       <table class="first_score_board">
         <thead>
@@ -115,6 +120,15 @@
         </tr>
       </tbody>
     </table>
+    
+    <div class="highscores">
+        <div class="row">Best HighScore Goes to :</div>
+    <div class="row">
+        <div class="name">Player3</div><div class="playerHighscore">310</div>
+    </div>
+    
+   </div>
+
     <button id="newGameButton">Restart Game</button>
     <h3 id="notice">Good Luck Champ</h3>
   
@@ -196,6 +210,15 @@
 
   <script src="js/dice.js" charset="utf-8"></script>
   <script>
+    
+    window.addEventListener('keydown',function(e){
+      if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){
+        if(e.target.nodeName=='INPUT'&&e.target.type=='text'){
+          e.preventDefault();return false;
+        }
+      }
+    },true);
+    
     window.onload = () => {
       var yahtzeeGame = new YahtzeeGame({ buttonId: "#rollDiceButton", container: ".dice_wrapper" });
       yahtzeeGame.rollDice();

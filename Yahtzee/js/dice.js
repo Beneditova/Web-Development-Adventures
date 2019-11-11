@@ -123,7 +123,7 @@ class YahtzeeGame {
   }
 
   rollDice() {
-    if(this.scoreBoard.gameOver()==false){
+    if (this.scoreBoard.gameOver() == false) {
       this.scoreBoard.resetTempScorecard();
 
       if (this.scoreBoard.pointSelected() == true) {
@@ -196,8 +196,10 @@ class ScoreBoard {
       everyRowSelected: false,
     }
 
+    this.highScore = new HighScore();
+
     this.gameOver = false;
-    
+
     this.pointSelected = false;
 
     this.mapper = { 1: 'ones', 2: 'twos', 3: 'threes', 4: 'fours', 5: 'fives', 6: 'sixes' };
@@ -222,7 +224,7 @@ class ScoreBoard {
       pointSelected: () => {
         return this.pointSelected;
       },
-     
+
       gameOver: () => {
         return this.gameOver;
       },
@@ -246,6 +248,10 @@ class ScoreBoard {
       newRound: (dices) => this.newRound(dices),
 
       resetTempScorecard: () => this.resetTempScorecard(),
+    
+      calculateThreeofakindOrMore: () => this.calculateThreeofakindOrMore(),
+
+      calculateBonus: () => this.calculateBonus(),
     }
   }
 
@@ -280,136 +286,203 @@ class ScoreBoard {
       this.game.temp_scorecard.chance.suggested += number;
     });
 
-    this.calculateSmallStraight();
-    this.calculateLargeStraight();
     this.calculateThreeofakindOrMore();
     this.calculateBonus();
   }
 
+  calculateSameDice() {
+    let score = 0;
+    for (let i = 1; i < 7; i++) {
+      score += this.game.temp_scorecard[this.mapper[i]].suggested;
+    }
+    return score;
+  }
+
   calculateThreeofakindOrMore() {
-    let isYahtzee = false, 
-        hasThreeOfAKind = false, 
-        hasFourOfAKind = false, 
-        hasPair = false;
+    let score = this.calculateSameDice();
+    
+    if (this.isYahtzee()) {
+      this.game.temp_scorecard.yahtzee.suggested = 50;
+    }
 
-    let threeOfAKindPoints = 0, 
-        fourOfAKindPoints = 0;
+    if (this.isFourKind()) {
+      this.game.temp_scorecard.fourkind.suggested = score;
+    }
 
+    if (this.isThreeKind() || this.isFourKind()) {
+      this.game.temp_scorecard.threekind.suggested = score;
+    }
+   
+    if (this.isThreeKind() && this.isPair()) {
+      this.game.temp_scorecard.fullhouse.suggested = 25;
+    }
+   
+    if(this.calculateSmallStraight()){
+      this.game.temp_scorecard.smallstraight.suggested = 30;
+    }
+    
+    if(this.calculateLargeStraight()){
+      this.game.temp_scorecard.largestraight.suggested = 40;
+    }
+  }
+
+  isPair() {
     for (let i = 1; i < 7; i++) {
       var score = this.game.temp_scorecard[this.mapper[i]].suggested;
 
       switch (this.mapper[i]) {
         case 'ones':
-          if (score == 6) {
-            isYahtzee = true;
-          } else if (score == 4) {
-            hasFourOfAKind = true;
-            fourOfAKindPoints = 4;
-
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = 3;
-          }
-          else if (score == 3) {
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = score;
-          } else if (score == 2) {
-            hasPair = true;
+          if (score == 2) {
+            return true;
           }
           break;
         case 'twos':
-          if (score == 12) {
-            isYahtzee = true;
-          } else if (score == 8) {
-            hasFourOfAKind = true;
-            fourOfAKindPoints = 8;
-
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = 6;
-          } else if (score == 6) {
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = score;
-          } else if (score == 4) {
-            hasPair = true;
+          if (score == 4) {
+            return true;
           }
           break;
         case 'threes':
-          if (this.game.temp_scorecard[this.mapper[i]].suggested == 18) {
-            isYahtzee = true;
-          } else if (score == 12) {
-            hasFourOfAKind = true;
-            fourOfAKindPoints = 12;
-
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = 9;
-          } else if (score == 9) {
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = score;
-          } else if (score == 6) {
-            hasPair = true;
+          if (score == 6) {
+            return true;
           }
           break;
         case 'fours':
-          if (score == 24) {
-            isYahtzee = true;
-          } else if (score == 16) {
-            hasFourOfAKind = true;
-            fourOfAKindPoints = 16;
-
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = 12;
-          } else if (score == 12) {
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = score;
-          } else if (score == 8) {
-            hasPair = true;
+          if (score == 8) {
+            return true;
           }
           break;
         case 'fives':
-          if (score == 30) {
-            isYahtzee = true;
-          } else if (score == 20) {
-            hasFourOfAKind = true;
-            fourOfAKindPoints = 20;
-
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = 15;
-          } else if (score == 15) {
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = score;
-          } else if (score == 10) {
-            hasPair = true;
+         if (score == 10) {
+          return true;
           }
           break;
         case 'sixes':
-          if (score == 36) {
-            isYahtzee = true;
-          } else if (score == 24) {
-            hasFourOfAKind = true;
-            fourOfAKindPoints = 24;
-
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = 18;
-          } else if (score == 18) {
-            hasThreeOfAKind = true;
-            threeOfAKindPoints = score;
-          } else if (score == 12) {
-            hasPair = true;
+         if (score == 12) {
+          return true;
           }
           break;
+        default: return false;
       }
     }
+  }
 
-    if (isYahtzee) {
-      this.game.temp_scorecard.yahtzee.suggested = 50;
+  isYahtzee() {
+    for (let i = 1; i < 7; i++) {
+      var score = this.game.temp_scorecard[this.mapper[i]].suggested;
+
+      switch (this.mapper[i]) {
+        case 'ones':
+          if (score == 6 && score == 5) {
+            return true;
+          } 
+          break;
+        case 'twos':
+          if (score == 12 && score == 10) {
+            return true;
+          } 
+          break;
+        case 'threes':
+          if (score == 18 && score == 15) {
+            return true;
+          }
+          break;
+        case 'fours':
+          if (score == 24 && score == 20) {
+            return true;
+          } 
+          break;
+        case 'fives':
+          if (score == 30 && score==25) {
+            return true;
+          }
+          break;
+        case 'sixes':
+          if (score == 36 && score == 30) {
+            return true;
+          } 
+          break;
+        default: return false;
+      }
     }
-    if (hasFourOfAKind) {
-      this.game.temp_scorecard.fourkind.suggested = fourOfAKindPoints;
+  }
+
+  isFourKind() {
+    for (let i = 1; i < 7; i++) {
+      var score = this.game.temp_scorecard[this.mapper[i]].suggested;
+
+      switch (this.mapper[i]) {
+        case 'ones':
+          if (score > 3) {
+            return true;
+          }
+          break;
+        case 'twos':
+          if (score > 7) {
+            return true;
+          }
+          break;
+        case 'threes':
+          if (score > 11) {
+            return true;
+          }
+          break;
+        case 'fours':
+          if (score > 15) {
+            return true;
+          }
+          break;
+        case 'fives':
+          if (score > 19) {
+            return true;
+          }
+          break;
+        case 'sixes':
+          if (score > 23) {
+            return true;
+          }
+          break;
+        default: return false;
+      }
     }
-    if (hasThreeOfAKind) {
-      this.game.temp_scorecard.threekind.suggested = threeOfAKindPoints;
-    }
-    if (hasThreeOfAKind && hasPair) {
-      this.game.temp_scorecard.fullhouse.suggested = 25;
+  }
+
+  isThreeKind() {
+    for (let i = 1; i < 7; i++) {
+      var score = this.game.temp_scorecard[this.mapper[i]].suggested;
+
+      switch (this.mapper[i]) {
+        case 'ones':
+          if (score == 3) {
+            return true;
+          }
+          break;
+        case 'twos':
+          if (score == 6) {
+            return true;
+          }
+          break;
+        case 'threes':
+          if (score == 9) {
+            return true;
+          }
+          break;
+        case 'fours':
+          if (score == 12) {
+            return true;
+          }
+          break;
+        case 'fives':
+          if (score == 15) {
+            return true;
+          }
+          break;
+        case 'sixes':
+          if (score == 30) {
+            return true;
+          }
+          break;
+        default: return false;
+      }
     }
   }
 
@@ -423,8 +496,10 @@ class ScoreBoard {
     }
 
     if (isLargeStraight == 6) {
-      this.game.temp_scorecard.largestraight.suggested = 40;
+     return true;
     }
+    
+    return false;
   }
 
   calculateSmallStraight() {
@@ -443,8 +518,10 @@ class ScoreBoard {
     }
 
     if (smallStraightFirstType == 5 || smallStraightSecondType == 5) {
-      this.game.temp_scorecard.smallstraight.suggested = 30;
+      return true;
     }
+   
+    return false;
   }
 
   calculateBonus() {
@@ -462,7 +539,7 @@ class ScoreBoard {
     return sum;
   }
 
-  rightTotal() {
+  totalScore() {
     let sum = 0;
     Object.values(this.game.scorecard).forEach((key) => {
       sum += key.saved;
@@ -471,9 +548,6 @@ class ScoreBoard {
     return sum;
   }
 
-  combinedtotal() {
-    return this.lefttotal() + this.rightTotal();
-  }
 
   leftTotalSelected() {
     let singleCombinations = this.game.temp_scorecard;
@@ -528,15 +602,17 @@ class ScoreBoard {
 
       document.getElementById("sum_score").querySelector('.sum_value').innerHTML = this.game.lefttotalSum;
     }
-
+    this.highScore.updateTopHighscore();
     if (this.everyRowSelected()) {
-      this.game.totalSum = this.rightTotal();
+      this.game.totalSum = this.totalScore();
 
+      document.getElementById("notice").innerHTML = "Good Job Champ";
       document.getElementById("total_score").querySelector('.total_value').innerHTML = this.game.totalSum;
 
       this.ovegameOver = true;
 
-      document.getElementById("notice").innerHTML = "Good Job Champ";
+      this.highScore.setHighscore(this.game.totalSum, document.querySelector('.username').value)
+      this.highScore.setLocalHighscore();
     }
 
     document.getElementById("round_score").querySelector('.round_value').innerHTML = this.game.round;
@@ -554,5 +630,31 @@ class ScoreBoard {
   }
 }
 
+class HighScore {
+  constructor() {
+    this.username,
+      this.highscore
+
+
+    return {
+      setHighscore: (highscore, name) => {
+        return this.highscore = highscore, this.username = name;
+      },
+
+      setLocalHighscore: () => this.setLocalHighscore(),
+      updateTopHighscore: () => this.updateTopHighscore(),
+    }
+  }
+
+  setLocalHighscore() {
+    localStorage.setItem("highscore", this.highscore);
+    localStorage.setItem("name", this.username);
+  }
+  
+  updateTopHighscore(){
+    document.querySelector('.name').innerHTML = `${localStorage.getItem("name")} with`;
+    document.querySelector('.playerHighscore').innerHTML = `${localStorage.getItem("highscore")} points`;
+  }
+}
 
 

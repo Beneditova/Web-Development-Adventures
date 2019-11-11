@@ -19,6 +19,12 @@ body {
     text-align: center;
   }
 
+  .highscores{
+    width: 19%;
+    height: 37px;
+    background-color: #768e9f;
+    transform: translateY(-128%);
+  }
   
 #cont2 {
     margin: 90px auto;
@@ -40,7 +46,34 @@ h3 {
     text-align: center;
 }
 
+input[type=text], select {
+    width: 10%;
+    padding: 6px 8px;
+    /* margin: 20px 0; */
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+  
+ 
+.name {
+    position: relative;
+    display: inline-block;
+    width: 50%;
+}
 
+.playerHighscore {
+    display: inline-block;
+}
+
+.row {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 40px;
+	border-bottom: 1px solid #AFAFAF;
+}
 table{
     width: 250px;
 }
@@ -66,7 +99,7 @@ table, th, td{
 .sum_score_board{
     width: 20%;
     margin-left: 39%;
-    margin-top: 21%;
+    margin-top: 16%;
 }
 
 .sum_score_board td{
