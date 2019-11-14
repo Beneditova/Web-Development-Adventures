@@ -372,32 +372,32 @@ class ScoreBoard {
 
       switch (this.mapper[i]) {
         case 'ones':
-          if (score == 6 && score == 5) {
+          if (score == 6 || score == 5) {
             return true;
           } 
           break;
         case 'twos':
-          if (score == 12 && score == 10) {
+          if (score == 12 || score == 10) {
             return true;
           } 
           break;
         case 'threes':
-          if (score == 18 && score == 15) {
+          if (score == 18 || score == 15) {
             return true;
           }
           break;
         case 'fours':
-          if (score == 24 && score == 20) {
+          if (score == 24 || score == 20) {
             return true;
           } 
           break;
         case 'fives':
-          if (score == 30 && score==25) {
+          if (score == 30 || score==25) {
             return true;
           }
           break;
         case 'sixes':
-          if (score == 36 && score == 30) {
+          if (score == 36 || score == 30) {
             return true;
           } 
           break;
@@ -602,7 +602,9 @@ class ScoreBoard {
 
       document.getElementById("sum_score").querySelector('.sum_value').innerHTML = this.game.lefttotalSum;
     }
+   
     this.highScore.updateTopHighscore();
+  
     if (this.everyRowSelected()) {
       this.game.totalSum = this.totalScore();
 
@@ -610,9 +612,12 @@ class ScoreBoard {
       document.getElementById("total_score").querySelector('.total_value').innerHTML = this.game.totalSum;
 
       this.ovegameOver = true;
-
-      this.highScore.setHighscore(this.game.totalSum, document.querySelector('.username').value)
-      this.highScore.setLocalHighscore();
+       if(localStorage!=null ){
+         if(localStorage.getItem("highscore")<this.game.totalSum){
+          this.highScore.setHighscore(this.game.totalSum, document.querySelector('.username').value)
+          this.highScore.setLocalHighscore();
+         }
+       }
     }
 
     document.getElementById("round_score").querySelector('.round_value').innerHTML = this.game.round;

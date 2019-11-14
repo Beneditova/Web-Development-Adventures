@@ -22,7 +22,6 @@ document.addEventListener("keypress", function(event) {
 
 });
 
-
 function makeSound(key) {
 
   switch (key) {
@@ -66,7 +65,6 @@ function makeSound(key) {
 
   }
 }
-
 
 function buttonAnimation(currentKey) {
 
