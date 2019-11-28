@@ -9,6 +9,8 @@ class NewPost extends Component {
         author: 'Max'
     }
 
+    
+
     render () {
         return (
             <div className="NewPost">
