@@ -23,11 +23,11 @@ class ContactData extends Component {
             ingredients: this.props.ingredients,
             price: this.props.price,
             customer: {
-                name: 'Max Schwarzmüller',
+                name: 'Kristi',
                 address: {
                     street: 'Teststreet 1',
                     zipCode: '41351',
-                    country: 'Germany'
+                    country: 'Poland'
                 },
                 email: 'test@test.com'
             },
