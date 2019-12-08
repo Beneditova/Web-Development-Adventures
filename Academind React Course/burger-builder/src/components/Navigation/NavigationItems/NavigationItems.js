@@ -11,7 +11,7 @@ const navigationItems = () =>(
           <NavigationItem link = "/orders" >
               Orders
           </NavigationItem>
-        </ul>
+         </ul>
 );
 
 export default navigationItems;
